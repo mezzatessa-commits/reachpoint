@@ -1,51 +1,950 @@
-IMPORTANT: DO NOT COPY OR PRESERVE ANY OF THE WORDS WRITTEN ON THE ORIGINAL REFERENCE PAPERS. The original text in the reference is WRONG and must be completely replaced.
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reach Point Agency | Influencer Marketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOrange: '#ff751f',
+                        brandDark: '#fffff6',
+                        brandGray: '#f5f5ea',
+                        brandLight: '#2b2b2b',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-Recreate the exact same video action and timing, but the ONLY text that should exist on the paper strips is:
+        /* Responsive 16:9 full cover video iframe styling */
+        .video-cover-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw;
+            min-height: 100%;
+            min-width: 177.77vh;
+            transform: translate(-50%, -50%);
+        }
 
-ARE
-YOU
-READY
-TO GO
-VIRAL
+        /* Subtle float animation for illustration elements */
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: subtle-float 4s ease-in-out infinite;
+        }
 
-The text must appear in this exact sequence:
+        /* Smooth FAQ Transition */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+            opacity: 0;
+        }
+        .faq-answer.open {
+            max-height: 300px;
+            opacity: 1;
+            padding-top: 1rem;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.open {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-brandDark text-brandLight overflow-x-hidden min-h-screen flex flex-col justify-between">
 
-1. First paper: ARE
-2. Second paper: YOU
-3. Third paper: READY
-4. Fourth paper: TO GO
-5. Final paper: VIRAL
+<!-- Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-brandDark/90 backdrop-blur-md border-b border-brandLight/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <button onclick="switchTab('home')" class="flex items-center space-x-3 text-left focus:outline-none">
+            <img src="https://i.postimg.cc/qgZDYP6G/image.png" alt="Reach Point" class="h-9 w-auto object-contain">
+            <div class="flex items-baseline space-x-1">
+                <span class="text-2xl font-black tracking-tighter text-brandLight">REACH</span>
+                <span class="text-2xl font-black tracking-tighter text-brandOrange">POINT</span>
+            </div>
+        </button>
 
-There must be NO other words anywhere in the video.
+        <!-- Dynamic Navigation Links + Orange Contact Us Button -->
+        <div class="flex items-center space-x-6 md:space-x-8 font-semibold text-sm tracking-wider uppercase">
+            <button id="nav-home-btn" onclick="switchTab('home')" class="relative py-1 text-brandOrange transition-colors duration-200 focus:outline-none">
+                HOME
+                <span id="dot-home" class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brandOrange rounded-full"></span>
+            </button>
+            <button id="nav-about-btn" onclick="switchTab('about')" class="relative py-1 text-brandLight/70 hover:text-brandOrange transition-colors duration-200 focus:outline-none">
+                ABOUT US
+                <span id="dot-about" class="hidden absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brandOrange rounded-full"></span>
+            </button>
+            <button id="nav-faq-btn" onclick="switchTab('faq')" class="relative py-1 text-brandLight/70 hover:text-brandOrange transition-colors duration-200 focus:outline-none">
+                FAQ
+                <span id="dot-faq" class="hidden absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brandOrange rounded-full"></span>
+            </button>
+            <a href="#contact" class="bg-brandOrange text-[#fffff6] px-5 py-2.5 rounded-full font-bold shadow-md shadow-brandOrange/25 hover:bg-brandLight hover:text-[#fffff6] transition duration-300">
+                CONTACT US
+            </a>
+        </div>
+    </div>
+</nav>
 
-IMPORTANT:
-The paper that appears from a distance / before hitting the wall must say exactly:
-VIRAL
+<!-- ========================================== -->
+<!-- 1. HOME VIEW WRAPPER (DEFAULT VISIBLE)    -->
+<!-- ========================================== -->
+<div id="view-home" class="w-full">
 
-NOT "COLLECTION"
-NOT "FOR"
-NOT "GO VIRAL"
-NOT any other word.
+    <!-- Hero Section (Slide 1) -->
+    <section id="hero" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center bg-brandDark">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brandOrange/15 via-transparent to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 text-center space-y-6 z-10 py-8">
+            <div class="inline-flex items-center space-x-2 bg-brandOrange/10 border border-brandOrange/30 text-brandOrange px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                <span>EST. 2025</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-8xl font-black tracking-tight leading-none uppercase">
+                FROM ATTENTION<br>TO <span class="text-brandOrange inline-block min-w-[200px]" id="typewriter">ACTION</span>
+            </h1>
+            
+            <p class="text-brandLight/70 text-lg md:text-2xl max-w-2xl mx-auto font-light tracking-wide">
+                INFLUENCER MARKETING AGENCY
+            </p>
 
-When the hand hits the wall and reveals the paper, the text must still be:
-VIRAL
+            <div class="pt-6">
+                <a href="#contact" class="inline-flex items-center justify-center bg-brandOrange text-[#fffff6] font-bold px-8 py-4 rounded-full text-base shadow-lg shadow-brandOrange/20 hover:bg-brandLight hover:text-[#fffff6] hover:shadow-none transition duration-300 transform hover:-translate-y-1">
+                    Grow Your Brand Now <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
 
-The word "GO" must ONLY appear once in the entire video, as part of:
-TO GO
+    <!-- Process Section (Slide 2 - 7 Steps) -->
+    <section id="process" class="py-24 bg-brandDark border-t border-brandLight/10 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-full mb-16 space-y-4">
+                <div class="flex items-center space-x-4 flex-wrap">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-brandLight whitespace-nowrap">
+                        Our Process to Grow Your Brand with Influencers
+                    </h2>
+                    <div class="hidden md:block w-20 h-2 bg-gradient-to-r from-brandOrange to-orange-400 rounded-full"></div>
+                </div>
+                <p class="text-brandLight/70 text-lg md:text-xl font-light leading-relaxed">
+                    The simple steps we take to launch and manage successful campaigns across Egypt & the GCC
+                </p>
+            </div>
 
-After "TO GO" appears, "GO" must NOT appear again.
+            <div class="relative px-2 md:px-6">
+                <button id="process-prev" class="absolute -left-3 md:-left-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-brandDark/90 border border-brandLight/10 flex items-center justify-center text-brandLight/50 hover:text-brandOrange hover:border-brandOrange transition duration-300 shadow-md">
+                    <i class="fa-solid fa-chevron-left text-xl"></i>
+                </button>
 
-The final paper must contain ONLY:
-VIRAL
+                <div id="process-container" class="overflow-hidden no-scrollbar py-4">
+                    <div id="process-track" class="flex transition-transform duration-500 ease-out gap-6">
+                        <!-- Card 1 -->
+                        <div class="min-w-[85%] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] bg-brandGray p-8 rounded-3xl border border-brandLight/5 flex flex-col justify-start space-y-5 hover:border-brandOrange/30 hover:shadow-lg transition duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brandOrange to-amber-500 flex items-center justify-center text-[#fffff6] text-lg shadow-md">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-brandLight">Brief & Planning</h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We start by understanding the brand objective, campaign type, target audience, cities, content format, timeline, and required creator profile.
+                            </p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="min-w-[85%] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] bg-brandGray p-8 rounded-3xl border border-brandLight/5 flex flex-col justify-start space-y-5 hover:border-brandOrange/30 hover:shadow-lg transition duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brandOrange to-amber-500 flex items-center justify-center text-[#fffff6] text-lg shadow-md">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-brandLight">Campaign Strategy</h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We turn your brief into an actionable roadmap: selecting creator tiers, setting timelines, and defining clear KPIs to ensure maximum impact.
+                            </p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="min-w-[85%] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] bg-brandGray p-8 rounded-3xl border border-brandLight/5 flex flex-col justify-start space-y-5 hover:border-brandOrange/30 hover:shadow-lg transition duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brandOrange to-amber-500 flex items-center justify-center text-[#fffff6] text-lg shadow-md">
+                                <i class="fa-solid fa-users-viewfinder"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-brandLight">Influencer Selection</h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We present a curated list of vetted creators matched to your exact campaign goals, so you can easily review and choose your favorites.
+                            </p>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="min-w-[85%] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] bg-brandGray p-8 rounded-3xl border border-brandLight/5 flex flex-col justify-start space-y-5 hover:border-brandOrange/30 hover:shadow-lg transition duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brandOrange to-amber-500 flex items-center justify-center text-[#fffff6] text-lg shadow-md">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-brandLight">Communication</h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We handle all creator communications, creative guidelines, deadlines, and daily follow-ups so you never have to chase anyone.
+                            </p>
+                        </div>
+                        <!-- Card 5 -->
+                        <div class="min-w-[85%] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] bg-brandGray p-8 rounded-3xl border border-brandLight/5 flex flex-col justify-start space-y-5 hover:border-brandOrange/30 hover:shadow-lg transition duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brandOrange to-amber-500 flex items-center justify-center text-[#fffff6] text-lg shadow-md">
+                                <i class="fa-solid fa-rocket"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-brandLight">Campaign Activation</h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                Whether it’s in-store visits, delivery promos, or multi-city campaigns, our team manages the on-ground logistics to keep everything running smoothly.
+                            </p>
+                        </div>
+                        <!-- Card 6 -->
+                        <div class="min-w-[85%] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] bg-brandGray p-8 rounded-3xl border border-brandLight/5 flex flex-col justify-start space-y-5 hover:border-brandOrange/30 hover:shadow-lg transition duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brandOrange to-amber-500 flex items-center justify-center text-[#fffff6] text-lg shadow-md">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h3 class="text-lg lg:text-xl font-bold text-brandLight whitespace-nowrap">Quality & Live Monitoring</h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We track every single post in real time ensuring creative quality, on time publishing, and 100% brand safety from start to finish.
+                            </p>
+                        </div>
+                        <!-- Card 7 -->
+                        <div class="min-w-[85%] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)] bg-brandGray p-8 rounded-3xl border border-brandLight/5 flex flex-col justify-start space-y-5 hover:border-brandOrange/30 hover:shadow-lg transition duration-300">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brandOrange to-amber-500 flex items-center justify-center text-[#fffff6] text-lg shadow-md">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-brandLight">Reporting</h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We wrap up with comprehensive analytics, proof of coverage, and clear ROI insights to optimize your future campaigns.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-Do not use the original reference words as a guide for the new text. Treat all original text as placeholder text and replace it completely.
+                <button id="process-next" class="absolute -right-3 md:-right-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-brandDark/90 border border-brandLight/10 flex items-center justify-center text-brandLight/50 hover:text-brandOrange hover:border-brandOrange transition duration-300 shadow-md">
+                    <i class="fa-solid fa-chevron-right text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
-Keep everything else exactly the same as the original video:
-same wall, same papers, same positions, same camera movement, same timing, same hand movement, same composition, same lighting, same colors, same perspective, and same overall aesthetic.
+    <!-- Stats & Impact Section (Slide 3) -->
+    <section id="stats" class="py-28 relative overflow-hidden bg-[#eb6412] text-white">
+        <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+            <div class="video-cover-container">
+                <iframe 
+                    src="https://streamable.com/e/dsb2g2?autoplay=1&muted=1&loop=1&controls=0" 
+                    class="w-full h-full object-cover opacity-75 mix-blend-screen" 
+                    frameborder="0" 
+                    allow="autoplay">
+                </iframe>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#d95d12]/85 via-[#ff751f]/75 to-[#eb6412]/85"></div>
+        </div>
 
-DO NOT redesign the video.
-DO NOT add any new text.
-DO NOT change any visual element except the requested hand, bracelet, shirt sleeve, and text.
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white drop-shadow-md">
+                    Proven Reach & Impact
+                </h2>
+            </div>
 
-The final result must visually match the original video, but with the correct text:
-ARE → YOU → READY → TO GO → VIRAL
+            <div class="space-y-12 md:space-y-16 max-w-5xl mx-auto">
+                <!-- Stat 1 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-10 group">
+                    <div class="w-full md:w-48 flex-shrink-0">
+                        <span class="stat-number text-6xl md:text-7xl font-black text-white tracking-tight drop-shadow-md transition duration-300 group-hover:scale-105 inline-block" data-target="50" data-suffix="K+">
+                            0K+
+                        </span>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-xl md:text-2xl font-black tracking-wide uppercase text-white drop-shadow-sm">
+                            TOTAL INFLUENCERS
+                        </h3>
+                        <p class="text-white/95 text-base md:text-lg font-normal leading-relaxed lg:whitespace-nowrap">
+                            From nano to mega creators—precisely matched to your goals and audience.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-10 group">
+                    <div class="w-full md:w-48 flex-shrink-0">
+                        <span class="stat-number text-6xl md:text-7xl font-black text-white tracking-tight drop-shadow-md transition duration-300 group-hover:scale-105 inline-block" data-target="7" data-suffix="K+">
+                            0K+
+                        </span>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-xl md:text-2xl font-black tracking-wide uppercase text-white drop-shadow-sm">
+                            SUCCESSFUL COLLABORATIONS
+                        </h3>
+                        <p class="text-white/95 text-base md:text-lg font-normal leading-relaxed lg:whitespace-nowrap">
+                            High-impact partnerships delivered seamlessly across top brands and creators.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-10 group">
+                    <div class="w-full md:w-48 flex-shrink-0">
+                        <span class="stat-number text-6xl md:text-7xl font-black text-white tracking-tight drop-shadow-md transition duration-300 group-hover:scale-105 inline-block" data-target="15" data-suffix="K+">
+                            0K+
+                        </span>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-xl md:text-2xl font-black tracking-wide uppercase text-white drop-shadow-sm">
+                            PIECES OF CONTENT
+                        </h3>
+                        <p class="text-white/95 text-base md:text-lg font-normal leading-relaxed lg:whitespace-nowrap">
+                            Creative, high-performing content driving real awareness and measurable engagement.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-10 group">
+                    <div class="w-full md:w-48 flex-shrink-0">
+                        <span class="stat-number text-6xl md:text-7xl font-black text-white tracking-tight drop-shadow-md transition duration-300 group-hover:scale-105 inline-block" data-target="90" data-suffix="+">
+                            0+
+                        </span>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-xl md:text-2xl font-black tracking-wide uppercase text-white drop-shadow-sm">
+                            BRAND SUCCESS STORIES
+                        </h3>
+                        <p class="text-white/95 text-base md:text-lg font-normal leading-relaxed lg:whitespace-nowrap">
+                            We don't just launch campaigns—we scale your business and drive real ROI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Minds Behind Your Growth Section (Slide 4) -->
+    <section id="heroes" class="py-24 bg-brandDark border-t border-brandLight/10 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-brandLight">
+                    The Minds Behind Your Growth
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Card 1 -->
+                <div class="bg-brandGray hover:bg-gradient-to-br hover:from-brandOrange hover:to-[#e05e0c] p-8 rounded-[2rem] border border-brandLight/10 flex flex-col items-center text-center space-y-6 hover:-translate-y-3 hover:shadow-2xl hover:shadow-brandOrange/30 transition-all duration-300 group cursor-pointer">
+                    <div class="w-20 h-20 rounded-2xl bg-white shadow-sm flex items-center justify-center text-3xl text-brandOrange group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="text-xl font-extrabold text-brandLight group-hover:text-white transition-colors duration-300">
+                            Influencer Onboarding Team
+                        </h3>
+                        <p class="text-brandLight/70 group-hover:text-white/90 text-sm font-light leading-relaxed transition-colors duration-300">
+                            Brings in new influencers and curates lookalike creators based on your brand's goals.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Card 2 -->
+                <div class="bg-brandGray hover:bg-gradient-to-br hover:from-brandOrange hover:to-[#e05e0c] p-8 rounded-[2rem] border border-brandLight/10 flex flex-col items-center text-center space-y-6 hover:-translate-y-3 hover:shadow-2xl hover:shadow-brandOrange/30 transition-all duration-300 group cursor-pointer">
+                    <div class="w-20 h-20 rounded-2xl bg-white shadow-sm flex items-center justify-center text-3xl text-brandOrange group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="text-xl font-extrabold text-brandLight group-hover:text-white transition-colors duration-300">
+                            Influencer Activation Team
+                        </h3>
+                        <p class="text-brandLight/70 group-hover:text-white/90 text-sm font-light leading-relaxed transition-colors duration-300">
+                            Responsible for activating influencers and ensuring they go live on time with the right brief.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Card 3 -->
+                <div class="bg-brandGray hover:bg-gradient-to-br hover:from-brandOrange hover:to-[#e05e0c] p-8 rounded-[2rem] border border-brandLight/10 flex flex-col items-center text-center space-y-6 hover:-translate-y-3 hover:shadow-2xl hover:shadow-brandOrange/30 transition-all duration-300 group cursor-pointer">
+                    <div class="w-20 h-20 rounded-2xl bg-white shadow-sm flex items-center justify-center text-3xl text-brandOrange group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="text-xl font-extrabold text-brandLight group-hover:text-white transition-colors duration-300">
+                            Monitoring & Quality Assurance Team
+                        </h3>
+                        <p class="text-brandLight/70 group-hover:text-white/90 text-sm font-light leading-relaxed transition-colors duration-300">
+                            Reviews all content before, during, and after it goes live—ensuring brand guidelines and KPIs are met.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Card 4 -->
+                <div class="bg-brandGray hover:bg-gradient-to-br hover:from-brandOrange hover:to-[#e05e0c] p-8 rounded-[2rem] border border-brandLight/10 flex flex-col items-center text-center space-y-6 hover:-translate-y-3 hover:shadow-2xl hover:shadow-brandOrange/30 transition-all duration-300 group cursor-pointer">
+                    <div class="w-20 h-20 rounded-2xl bg-white shadow-sm flex items-center justify-center text-3xl text-brandOrange group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="text-xl font-extrabold text-brandLight group-hover:text-white transition-colors duration-300">
+                            Reporting Team
+                        </h3>
+                        <p class="text-brandLight/70 group-hover:text-white/90 text-sm font-light leading-relaxed transition-colors duration-300">
+                            Delivers comprehensive post-campaign reports, insights, and actionable recommendations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- ========================================== -->
+<!-- 2. ABOUT US VIEW WRAPPER (HIDDEN INITIALLY)-->
+<!-- ========================================== -->
+<div id="view-about" class="w-full hidden">
+    <section class="relative min-h-[85vh] pt-32 pb-24 flex flex-col justify-center bg-brandDark">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brandOrange/15 via-transparent to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full space-y-20">
+            
+            <!-- Top Hero Section in About Us -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Content Column -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight">
+                        <span class="text-brandLight">About</span> <span class="text-brandOrange">Us</span>
+                    </h1>
+
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brandLight tracking-tight leading-tight">
+                        The Smart Way to Run Bulk Influencer Campaigns.
+                    </h2>
+
+                    <p class="text-brandLight/75 text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-2xl">
+                        Bulk influencer marketing doesn’t have to mean generic content. We engineer tailored, multi-creator rollouts that preserve your brand identity while flooding your target audience with authentic endorsements.
+                    </p>
+
+                    <div class="pt-2 flex flex-wrap gap-3 text-xs sm:text-sm font-semibold">
+                        <span class="inline-flex items-center px-4 py-2 rounded-full bg-brandGray border border-brandLight/10 text-brandLight/80 shadow-sm">
+                            <i class="fa-solid fa-bullseye text-brandOrange mr-2"></i> Tailored Rollouts
+                        </span>
+                        <span class="inline-flex items-center px-4 py-2 rounded-full bg-brandGray border border-brandLight/10 text-brandLight/80 shadow-sm">
+                            <i class="fa-solid fa-shield-halved text-brandOrange mr-2"></i> Brand Identity Intact
+                        </span>
+                        <span class="inline-flex items-center px-4 py-2 rounded-full bg-brandGray border border-brandLight/10 text-brandLight/80 shadow-sm">
+                            <i class="fa-solid fa-chart-line text-brandOrange mr-2"></i> Measurable Impact
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Visual Column (Warm Brand Palette) -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-brandOrange/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full border-[18px] border-brandOrange/20 bg-white/70 backdrop-blur-md shadow-2xl flex items-center justify-center animate-float">
+                            <div class="w-44 h-44 sm:w-56 sm:h-56 rounded-full border-[14px] border-brandOrange/40 bg-white/90 shadow-inner flex items-center justify-center">
+                                <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-[#e05e0c] to-brandOrange flex items-center justify-center text-white text-3xl sm:text-4xl shadow-lg shadow-brandOrange/50">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute top-2 left-6 w-12 h-12 rounded-2xl bg-white shadow-xl flex items-center justify-center text-brandLight text-lg hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-user text-brandOrange"></i>
+                        </div>
+                        <div class="absolute top-6 right-6 w-12 h-12 rounded-2xl bg-white shadow-xl flex items-center justify-center text-brandOrange text-lg hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-earth-americas"></i>
+                        </div>
+                        <div class="absolute bottom-6 left-4 w-12 h-12 rounded-2xl bg-white shadow-xl flex items-center justify-center text-brandLight text-lg hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-briefcase text-brandOrange"></i>
+                        </div>
+                        <div class="absolute bottom-2 right-8 w-12 h-12 rounded-2xl bg-white shadow-xl flex items-center justify-center text-brandLight text-lg hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-rocket text-brandOrange"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mission & Vision Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                <!-- Our Mission Card -->
+                <div class="bg-white/90 backdrop-blur-sm p-8 sm:p-10 rounded-[2.5rem] border border-brandLight/5 shadow-xl shadow-black/[0.02] flex items-start space-x-6 hover:shadow-2xl hover:border-brandOrange/30 transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-brandOrange/10 border border-brandOrange/20 flex items-center justify-center text-brandOrange text-2xl flex-shrink-0 group-hover:scale-110 group-hover:bg-brandOrange group-hover:text-white transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="text-xl sm:text-2xl font-black text-brandLight tracking-tight">
+                            Our Mission
+                        </h3>
+                        <p class="text-brandLight/70 text-sm sm:text-base font-light leading-relaxed">
+                            To connect brands with the right influencers at scale, helping them reach more people and grow sales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Our Vision Card -->
+                <div class="bg-white/90 backdrop-blur-sm p-8 sm:p-10 rounded-[2.5rem] border border-brandLight/5 shadow-xl shadow-black/[0.02] flex items-start space-x-6 hover:shadow-2xl hover:border-brandOrange/30 transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-brandOrange/10 border border-brandOrange/20 flex items-center justify-center text-brandOrange text-2xl flex-shrink-0 group-hover:scale-110 group-hover:bg-brandOrange group-hover:text-white transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="text-xl sm:text-2xl font-black text-brandLight tracking-tight">
+                            Our Vision
+                        </h3>
+                        <p class="text-brandLight/70 text-sm sm:text-base font-light leading-relaxed">
+                            To power 1,000+ high-impact influencer campaigns across MENA by 2035.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us Section -->
+            <div class="pt-8 space-y-12">
+                <div class="text-center max-w-xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-brandLight">
+                        Why <span class="text-brandOrange">Choose</span> Us
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-[2.5rem] border border-brandLight/5 shadow-xl shadow-black/[0.02] flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:border-brandOrange/40 hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="w-16 h-16 rounded-full bg-brandOrange flex items-center justify-center text-white text-2xl shadow-lg shadow-brandOrange/30 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <div class="space-y-3 flex-1 flex flex-col justify-start">
+                            <h3 class="text-xl font-extrabold text-brandLight">
+                                Custom Built Campaigns
+                            </h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We design every campaign around your exact audience and goals
+                            </p>
+                        </div>
+                        <div class="w-12 h-1 bg-brandOrange/80 rounded-full group-hover:w-20 transition-all duration-300"></div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-[2.5rem] border border-brandLight/5 shadow-xl shadow-black/[0.02] flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:border-brandOrange/40 hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="w-16 h-16 rounded-full bg-brandOrange flex items-center justify-center text-white text-2xl shadow-lg shadow-brandOrange/30 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div class="space-y-3 flex-1 flex flex-col justify-start">
+                            <h3 class="text-xl font-extrabold text-brandLight">
+                                Fast Track Launch
+                            </h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                From brief to execution, we can get your influencer campaign up and running in as little as 48 hours
+                            </p>
+                        </div>
+                        <div class="w-12 h-1 bg-brandOrange/80 rounded-full group-hover:w-20 transition-all duration-300"></div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-[2.5rem] border border-brandLight/5 shadow-xl shadow-black/[0.02] flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:border-brandOrange/40 hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="w-16 h-16 rounded-full bg-brandOrange flex items-center justify-center text-white text-2xl shadow-lg shadow-brandOrange/30 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <div class="space-y-3 flex-1 flex flex-col justify-start">
+                            <h3 class="text-xl font-extrabold text-brandLight">
+                                Trusted Creator Network
+                            </h3>
+                            <p class="text-brandLight/70 text-sm leading-relaxed font-light">
+                                We maintain direct relationships with active influencers, ensuring authentic content, better commitments, and smoother delivery
+                            </p>
+                        </div>
+                        <div class="w-12 h-1 bg-brandOrange/80 rounded-full group-hover:w-20 transition-all duration-300"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- 3. FAQ VIEW WRAPPER (INTERACTIVE ACCORDION)-->
+<!-- ========================================== -->
+<div id="view-faq" class="w-full hidden">
+    <section class="relative min-h-[85vh] pt-32 pb-24 flex flex-col justify-center bg-brandDark">
+        <!-- Ambient Background Glow -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brandOrange/15 via-transparent to-transparent pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10 w-full space-y-12">
+            
+            <!-- Header Section -->
+            <div class="text-center space-y-4">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-brandLight">
+                    Frequently Asked <span class="text-brandOrange">Questions</span>
+                </h1>
+                <p class="text-brandLight/70 text-base sm:text-lg font-light">
+                    Everything you need to know about our services.
+                </p>
+            </div>
+
+            <!-- Accordion Container -->
+            <div class="space-y-4">
+                
+                <!-- Question 1 -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-brandLight/5 shadow-sm hover:shadow-md transition-all duration-200">
+                    <button onclick="toggleFaq(1)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer">
+                        <span class="text-base sm:text-lg font-bold text-brandLight">
+                            How fast can a campaign be launched ?
+                        </span>
+                        <div id="faq-icon-1" class="faq-icon w-8 h-8 rounded-full bg-brandOrange/10 flex items-center justify-center text-brandOrange text-sm flex-shrink-0">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div id="faq-answer-1" class="faq-answer px-6 pb-6 text-brandLight/75 text-sm sm:text-base font-light leading-relaxed">
+                        We can launch your campaign in as little as 48 hours once the creators and brief are approved.
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-brandLight/5 shadow-sm hover:shadow-md transition-all duration-200">
+                    <button onclick="toggleFaq(2)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer">
+                        <span class="text-base sm:text-lg font-bold text-brandLight">
+                            Can I run a campaign in multiple countries at once ?
+                        </span>
+                        <div id="faq-icon-2" class="faq-icon w-8 h-8 rounded-full bg-brandOrange/10 flex items-center justify-center text-brandOrange text-sm flex-shrink-0">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div id="faq-answer-2" class="faq-answer px-6 pb-6 text-brandLight/75 text-sm sm:text-base font-light leading-relaxed">
+                        Yes, absolutely. We can launch and manage multi-country campaigns simultaneously across Egypt and the GCC with local creators for each market.
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-brandLight/5 shadow-sm hover:shadow-md transition-all duration-200">
+                    <button onclick="toggleFaq(3)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer">
+                        <span class="text-base sm:text-lg font-bold text-brandLight">
+                            Is there a limit on how many influencers I can use ?
+                        </span>
+                        <div id="faq-icon-3" class="faq-icon w-8 h-8 rounded-full bg-brandOrange/10 flex items-center justify-center text-brandOrange text-sm flex-shrink-0">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div id="faq-answer-3" class="faq-answer px-6 pb-6 text-brandLight/75 text-sm sm:text-base font-light leading-relaxed">
+                        No limit at all. We specialize in high-volume campaigns, whether you want to work with 10, 50, or 100+ influencers at the same time. We handle the full coordination for all of them seamlessly.
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-brandLight/5 shadow-sm hover:shadow-md transition-all duration-200">
+                    <button onclick="toggleFaq(4)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer">
+                        <span class="text-base sm:text-lg font-bold text-brandLight">
+                            Who handles the influencer payments ?
+                        </span>
+                        <div id="faq-icon-4" class="faq-icon w-8 h-8 rounded-full bg-brandOrange/10 flex items-center justify-center text-brandOrange text-sm flex-shrink-0">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div id="faq-answer-4" class="faq-answer px-6 pb-6 text-brandLight/75 text-sm sm:text-base font-light leading-relaxed">
+                        We handle everything. You only pay one simple invoice to us, and our team takes care of all creator contracts, negotiations, and individual payouts on your behalf.
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-brandLight/5 shadow-sm hover:shadow-md transition-all duration-200">
+                    <button onclick="toggleFaq(5)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer">
+                        <span class="text-base sm:text-lg font-bold text-brandLight">
+                            Which platforms do you cover ?
+                        </span>
+                        <div id="faq-icon-5" class="faq-icon w-8 h-8 rounded-full bg-brandOrange/10 flex items-center justify-center text-brandOrange text-sm flex-shrink-0">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div id="faq-answer-5" class="faq-answer px-6 pb-6 text-brandLight/75 text-sm sm:text-base font-light leading-relaxed">
+                        We cover all major platforms where your audience spends their time, mainly Instagram, TikTok, Snapchat, and YouTube. We choose the right mix based on where your brand will get the best reach and engagement.
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-brandLight/5 shadow-sm hover:shadow-md transition-all duration-200">
+                    <button onclick="toggleFaq(6)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer">
+                        <span class="text-base sm:text-lg font-bold text-brandLight">
+                            What types of influencers do you work with?
+                        </span>
+                        <div id="faq-icon-6" class="faq-icon w-8 h-8 rounded-full bg-brandOrange/10 flex items-center justify-center text-brandOrange text-sm flex-shrink-0">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div id="faq-answer-6" class="faq-answer px-6 pb-6 text-brandLight/75 text-sm sm:text-base font-light leading-relaxed">
+                        We work with a wide range of creators from Nano and Micro influencers who bring high engagement, to Macro creators who deliver massive brand awareness. We select the best fit based on your industry, target audience, and campaign goals.
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-brandLight/5 shadow-sm hover:shadow-md transition-all duration-200">
+                    <button onclick="toggleFaq(7)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer">
+                        <span class="text-base sm:text-lg font-bold text-brandLight">
+                            How can I start a campaign?
+                        </span>
+                        <div id="faq-icon-7" class="faq-icon w-8 h-8 rounded-full bg-brandOrange/10 flex items-center justify-center text-brandOrange text-sm flex-shrink-0">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div id="faq-answer-7" class="faq-answer px-6 pb-6 text-brandLight/75 text-sm sm:text-base font-light leading-relaxed">
+                        Reach out to us directly via WhatsApp or email. Share your goals, budget, and target audience, and we’ll build a custom creator strategy and launch plan for you.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- 4. FOOTER SECTION (PERSISTENT & UNIFIED)   -->
+<!-- ========================================== -->
+<footer id="contact" class="bg-brandDark pt-20 pb-12 border-t border-brandLight/10 mt-auto">
+    <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 items-start">
+            
+            <!-- Col 1: Logo, Bio & Soft Round Flags -->
+            <div class="md:col-span-5 space-y-6">
+                <div class="flex items-center">
+                    <img src="https://i.postimg.cc/qgZDYP6G/image.png" alt="Reach Point Logo" class="h-16 w-auto object-contain">
+                </div>
+
+                <p class="text-brandLight/70 text-sm md:text-base font-light leading-relaxed max-w-sm">
+                    Connecting ambitious brands with the right creators for measurable growth and real results.
+                </p>
+
+                <!-- Soft & Pastel Harmonized Flags -->
+                <div class="flex items-center flex-wrap gap-2.5 pt-2">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/kw.svg" alt="Kuwait" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="Kuwait">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/ae.svg" alt="UAE" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="UAE">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/sa.svg" alt="Saudi Arabia" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="Saudi Arabia">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/eg.svg" alt="Egypt" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="Egypt">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/qa.svg" alt="Qatar" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="Qatar">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/bh.svg" alt="Bahrain" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="Bahrain">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/om.svg" alt="Oman" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="Oman">
+                    <img src="https://hatscripts.github.io/circle-flags/flags/lb.svg" alt="Lebanon" class="w-7 h-7 rounded-full shadow-sm border border-black/5 opacity-85 saturate-[0.8] brightness-[0.98] hover:opacity-100 hover:saturate-100 transition duration-300" title="Lebanon">
+                </div>
+            </div>
+
+            <!-- Col 2: Contact Us (Clean Brand Icons Only) -->
+            <div class="md:col-span-4 space-y-4">
+                <h4 class="text-base font-bold tracking-tight text-brandLight">
+                    Contact Us
+                </h4>
+                
+                <div class="flex flex-col space-y-3.5">
+                    <!-- Email -->
+                    <a href="mailto:Reachpointofficial@gmail.com" class="inline-flex items-center space-x-3 group">
+                        <i class="fa-regular fa-envelope text-xl text-brandOrange group-hover:scale-110 transition duration-300 w-6 text-center"></i>
+                        <span class="text-sm font-medium text-brandLight/80 group-hover:text-brandOrange transition duration-300">
+                            Reachpointofficial@gmail.com
+                        </span>
+                    </a>
+
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/201286570847" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 group">
+                        <i class="fa-brands fa-whatsapp text-2xl text-brandOrange group-hover:scale-110 transition duration-300 w-6 text-center"></i>
+                        <span class="text-sm font-medium text-brandLight/80 group-hover:text-brandOrange transition duration-300">
+                            +201286570847
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Col 3: Stay in Touch (Centered Social Icons) -->
+            <div class="md:col-span-3 space-y-5 flex flex-col items-start md:items-center">
+                <h4 class="text-base font-bold tracking-tight text-brandLight">
+                    Stay in touch
+                </h4>
+                
+                <div class="flex items-center justify-center gap-3">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/reachpoint_me" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-xl bg-white border border-brandLight/10 flex items-center justify-center text-brandLight/60 hover:text-brandOrange hover:border-brandOrange/40 hover:shadow-md hover:-translate-y-1 transition duration-300" title="Instagram">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@reachpoint_me" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-xl bg-white border border-brandLight/10 flex items-center justify-center text-brandLight/60 hover:text-brandOrange hover:border-brandOrange/40 hover:shadow-md hover:-translate-y-1 transition duration-300" title="TikTok">
+                        <i class="fa-brands fa-tiktok text-lg"></i>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/reachpointofficial/" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-xl bg-white border border-brandLight/10 flex items-center justify-center text-brandLight/60 hover:text-brandOrange hover:border-brandOrange/40 hover:shadow-md hover:-translate-y-1 transition duration-300" title="Facebook">
+                        <i class="fa-brands fa-facebook-f text-base"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Copyright -->
+        <div class="pt-8 border-t border-brandLight/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-brandLight/50">
+            <p>COPYRIGHT &copy; 2026 REACH POINT AGENCY. ALL RIGHTS RESERVED.</p>
+            <a href="#" class="hover:text-brandOrange transition duration-200">Privacy policy</a>
+        </div>
+
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+    // Tab Switching Logic (Single Page Navigation)
+    function switchTab(tab) {
+        const homeView = document.getElementById('view-home');
+        const aboutView = document.getElementById('view-about');
+        const faqView = document.getElementById('view-faq');
+        
+        const navHomeBtn = document.getElementById('nav-home-btn');
+        const navAboutBtn = document.getElementById('nav-about-btn');
+        const navFaqBtn = document.getElementById('nav-faq-btn');
+        
+        const dotHome = document.getElementById('dot-home');
+        const dotAbout = document.getElementById('dot-about');
+        const dotFaq = document.getElementById('dot-faq');
+
+        // Hide all views first
+        homeView.classList.add('hidden');
+        aboutView.classList.add('hidden');
+        faqView.classList.add('hidden');
+
+        // Reset all buttons to inactive
+        navHomeBtn.className = "relative py-1 text-brandLight/70 hover:text-brandOrange transition-colors duration-200 focus:outline-none";
+        navAboutBtn.className = "relative py-1 text-brandLight/70 hover:text-brandOrange transition-colors duration-200 focus:outline-none";
+        navFaqBtn.className = "relative py-1 text-brandLight/70 hover:text-brandOrange transition-colors duration-200 focus:outline-none";
+        
+        dotHome.classList.add('hidden');
+        dotAbout.classList.add('hidden');
+        dotFaq.classList.add('hidden');
+
+        // Activate Selected Tab
+        if (tab === 'home') {
+            homeView.classList.remove('hidden');
+            navHomeBtn.className = "relative py-1 text-brandOrange transition-colors duration-200 focus:outline-none";
+            dotHome.classList.remove('hidden');
+        } else if (tab === 'about') {
+            aboutView.classList.remove('hidden');
+            navAboutBtn.className = "relative py-1 text-brandOrange transition-colors duration-200 focus:outline-none";
+            dotAbout.classList.remove('hidden');
+        } else if (tab === 'faq') {
+            faqView.classList.remove('hidden');
+            navFaqBtn.className = "relative py-1 text-brandOrange transition-colors duration-200 focus:outline-none";
+            dotFaq.classList.remove('hidden');
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Toggle FAQ Accordion
+    function toggleFaq(index) {
+        const answer = document.getElementById(`faq-answer-${index}`);
+        const icon = document.getElementById(`faq-icon-${index}`);
+        
+        const isOpen = answer.classList.contains('open');
+
+        if (isOpen) {
+            answer.classList.remove('open');
+            icon.classList.remove('open');
+            icon.innerHTML = '<i class="fa-solid fa-plus"></i>';
+        } else {
+            answer.classList.add('open');
+            icon.classList.add('open');
+            icon.innerHTML = '<i class="fa-solid fa-plus"></i>';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Typewriter Script
+        const words = ["ACTION", "BUZZ", "GROWTH", "RESULTS"];
+        const el = document.getElementById('typewriter');
+        let wordIndex = 0;
+        
+        setInterval(() => {
+            if (el) {
+                wordIndex = (wordIndex + 1) % words.length;
+                el.textContent = words[wordIndex];
+            }
+        }, 2000);
+
+        // Process Slider Script
+        const processTrack = document.getElementById('process-track');
+        const processNext = document.getElementById('process-next');
+        const processPrev = document.getElementById('process-prev');
+        let processIndex = 0;
+
+        function getCardStep() {
+            if (!processTrack || !processTrack.firstElementChild) return 0;
+            return processTrack.firstElementChild.getBoundingClientRect().width + 24;
+        }
+
+        function getMaxIndex() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 640) return 5;
+            return 6;
+        }
+
+        if (processNext && processPrev && processTrack) {
+            processNext.addEventListener('click', () => {
+                const maxIndex = getMaxIndex();
+                processIndex = (processIndex < maxIndex) ? processIndex + 1 : 0;
+                processTrack.style.transform = `translateX(-${processIndex * getCardStep()}px)`;
+            });
+
+            processPrev.addEventListener('click', () => {
+                const maxIndex = getMaxIndex();
+                processIndex = (processIndex > 0) ? processIndex - 1 : maxIndex;
+                processTrack.style.transform = `translateX(-${processIndex * getCardStep()}px)`;
+            });
+        }
+
+        // Animated Number Counters on Scroll
+        const statsSection = document.getElementById('stats');
+        const counters = document.querySelectorAll('.stat-number');
+        let counted = false;
+
+        function runCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const suffix = counter.getAttribute('data-suffix');
+                const duration = 2000;
+                const startTime = performance.now();
+
+                function updateCount(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = 1 - (1 - progress) * (1 - progress);
+                    const currentCount = Math.floor(easeProgress * target);
+                    
+                    counter.textContent = currentCount + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.textContent = target + suffix;
+                    }
+                }
+
+                requestAnimationFrame(updateCount);
+            });
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counted) {
+                    runCounters();
+                    counted = true;
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    });
+</script>
+
+</body>
+</html>
